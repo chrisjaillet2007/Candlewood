@@ -1,85 +1,99 @@
 # Updating the Website
 
 This site is built so the day-to-day content — portfolio projects, services,
-journal posts, testimonials, founder bios — lives in a handful of plain
-files, separate from the page design. You don't need to touch any layout
-code to add a project or swap in a real photo.
+journal posts, testimonials, founder bios — lives separate from the page
+design. You don't need to touch any layout code to add a project or swap in
+a real photo.
 
-If you don't have a developer on hand for these edits, any working
-Next.js/React developer can make every change on this page without needing
-extra context — point them here first.
+**Adding or editing a portfolio project is easiest through the built-in
+`/admin` page** on the live site — a simple form with a photo upload
+button, no code involved. See `ADMIN.md` for the (one-time) setup a
+developer needs to do first. Everything else below — services, journal,
+testimonials, founder bios — is still edited by hand in code; if you don't
+have a developer on hand for those, any working Next.js/React developer can
+make every change described here without needing extra context.
 
 ## Where everything lives
 
 | Content | File |
 |---|---|
-| Portfolio projects | `src/data/projects.ts` |
+| Portfolio projects | `content/projects.json` (or the `/admin` page) |
 | Services | `src/data/services.ts` |
 | Journal posts | `src/data/journal.ts` |
 | Testimonials | `src/data/testimonials.ts` |
 | Founder photos | `src/data/team.ts` |
 | Nav menu links | `src/data/nav.ts` |
 
-Each file exports a plain array (or object) of content. The pages that
+Each file holds a plain array (or object) of content. The pages that
 display them — the portfolio grid, the services page, and so on — read from
-these files automatically. Add, remove, or reorder an entry in the file, and
-the site updates.
+these automatically. Add, remove, or reorder an entry, and the site updates.
 
 ## Adding a portfolio project
 
-Open `src/data/projects.ts`. At the bottom of the `PROJECTS` array is a
-commented-out template — copy it, uncomment it, and fill in the fields:
+**Preferred: use `/admin/portfolio` on the live site** (see `ADMIN.md`) —
+fill in the form, upload a photo, click Publish.
 
-```ts
+**By hand:** open `content/projects.json` — a plain JSON array (no admin
+page needed, but no template comments either, since JSON doesn't support
+them). Add an entry shaped like this:
+
+```json
 {
-  slug: "your-project-slug",              // used in the URL: /portfolio/your-project-slug
-  name: "A Short, Descriptive Name",
-  location: "Town, MA",
-  type: "Whole-Home Design",               // also powers the "Work" page filter chips
-  description: "One sentence, shown on the portfolio grid.",
-  longDescription: "A short paragraph, shown on the project's own page.",
-  mood: "interior",                        // "interior" | "detail" | "exterior"
-  seed: "your-project-slug",               // any unique string
-  size: "standard",                        // "hero" | "wide" | "standard"
-},
+  "slug": "your-project-slug",
+  "name": "A Short, Descriptive Name",
+  "location": "Town, MA",
+  "type": "Whole-Home Design",
+  "description": "One sentence, shown on the portfolio grid.",
+  "longDescription": "A short paragraph, shown on the project's own page.",
+  "mood": "interior",
+  "seed": "your-project-slug",
+  "size": "standard"
+}
 ```
 
+- `slug` is used in the URL (`/portfolio/your-project-slug`) — lowercase,
+  hyphens instead of spaces, no punctuation.
 - `type` becomes a filter chip on the `/portfolio` page automatically — use
   a consistent value if you want a project to group with existing ones
   (e.g. reuse `"Kitchen & Bath Design"` rather than inventing a near-duplicate).
 - `size` only affects the project's size in the homepage's featured-work
   layout (`"hero"` = large, `"wide"` = full-width, `"standard"` = normal).
   It has no effect on the `/portfolio` page itself.
-- `mood` and `seed` control the generative placeholder artwork (see below) —
-  they stop mattering once you add a real `image`.
+- `mood` (`"interior"` | `"detail"` | `"exterior"`) and `seed` (any unique
+  string) only control the generative placeholder artwork — they stop
+  mattering once you add a real `image`.
 
 To remove a project, delete its entry. To reorder, move entries up or down
 in the array — the homepage and portfolio page both follow array order.
+Remember `content/projects.json` must stay valid JSON — no trailing commas,
+and every key in double quotes.
 
 ## Adding a real photo
 
 Every image slot on the site — portfolio covers, journal covers, founder
 portraits — falls back to a bespoke line-drawing placeholder until a real
-photo is supplied. There's nothing to switch "on"; you just add a path:
+photo is supplied. Through `/admin`, this is just the photo upload button
+on the portfolio form. By hand:
 
 1. Save the photo somewhere under `public/`, for example:
    `public/portfolio/andover-colonial/cover.jpg`
 2. Reference it with a leading slash, relative to `public/`:
-   ```ts
-   image: "/portfolio/andover-colonial/cover.jpg",
+   ```json
+   "image": "/portfolio/andover-colonial/cover.jpg"
    ```
 3. Rebuild/redeploy. The placeholder for that slot is gone — everything
    else (the hover animation, the reveal-on-scroll, the layout) is unchanged.
 
 This applies per content type:
 
-- **Portfolio project cover** — set `image` on the project in `projects.ts`.
+- **Portfolio project cover** — set `image` on the project in
+  `content/projects.json`.
 - **Portfolio project detail photos** — set `gallery` (up to two extra
   photos shown on the project's own page):
-  ```ts
-  gallery: ["/portfolio/andover-colonial/detail.jpg", "/portfolio/andover-colonial-b.jpg"],
+  ```json
+  "gallery": ["/portfolio/andover-colonial/detail.jpg", "/portfolio/andover-colonial-b.jpg"]
   ```
-- **Journal post cover** — set `image` on the post in `journal.ts`.
+- **Journal post cover** — set `image` on the post in `src/data/journal.ts`.
 - **Founder portraits** (used on both the homepage and the About page) —
   set `annmarie` and/or `lauren` in `src/data/team.ts`. There's also
   `ABOUT_HERO_PHOTO` in that same file for the wide shot at the top of the
@@ -87,7 +101,8 @@ This applies per content type:
 
 Use real photography sized reasonably for the web (a few hundred KB, not a
 multi-megabyte camera export) — Next.js handles responsive sizing and lazy
-loading automatically once a path is supplied.
+loading automatically once a path is supplied. (The `/admin` page resizes
+uploaded photos for you automatically.)
 
 ## Editing services
 
