@@ -16,6 +16,7 @@ export default function ProjectCard({
       <div className="overflow-hidden">
         <div className="transition-transform duration-700 ease-out group-hover:scale-[1.03]">
           <EditorialImage
+            src={project.image}
             alt={project.description}
             mood={project.mood}
             tone="cream"

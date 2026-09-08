@@ -8,13 +8,31 @@ export type Project = {
   mood: "interior" | "detail" | "exterior";
   seed: string;
   size: "hero" | "wide" | "standard";
+  /**
+   * Path to the real cover photo, once one exists — e.g.
+   * "/portfolio/andover-colonial/cover.jpg" for a file saved at
+   * `public/portfolio/andover-colonial/cover.jpg`. Leave unset and the
+   * project keeps its generative placeholder plate automatically; nothing
+   * else needs to change.
+   */
+  image?: string;
+  /**
+   * Up to two additional photos shown on the project's detail page (a
+   * detail shot and a secondary view). Same rule: paths under `/public`,
+   * omit to keep the placeholder art for that slot.
+   */
+  gallery?: [string?, string?];
 };
 
 /**
- * Representative placeholder projects — standing in for real Candlewood
- * work until case studies exist. Names describe the town and project type
- * only (the way most design studios label in-progress or anonymized work),
- * not a specific real address or client.
+ * Every portfolio project on the site. This is the file to edit when the
+ * firm has a new project to add, or a real photo to swap in for a
+ * placeholder — see CONTENT.md at the repo root for a full walkthrough.
+ *
+ * Today these are representative placeholder projects — standing in for
+ * real Candlewood work until case studies exist. Names describe the town
+ * and project type only (the way most design studios label in-progress or
+ * anonymized work), not a specific real address or client.
  */
 export const PROJECTS: Project[] = [
   {
@@ -103,4 +121,21 @@ export const PROJECTS: Project[] = [
     seed: "winchester-entry",
     size: "standard",
   },
+
+  // To add a new project, copy this template into the array above and
+  // fill it in — see CONTENT.md for the full walkthrough:
+  //
+  // {
+  //   slug: "your-project-slug",              // used in the URL: /portfolio/your-project-slug
+  //   name: "A Short, Descriptive Name",
+  //   location: "Town, MA",
+  //   type: "Whole-Home Design",               // also powers the portfolio filter chips
+  //   description: "One sentence, shown on the portfolio grid.",
+  //   longDescription: "A short paragraph, shown on the project's own page.",
+  //   mood: "interior",                        // "interior" | "detail" | "exterior" — only matters until `image` is set
+  //   seed: "your-project-slug",               // any unique string; keeps the placeholder art stable
+  //   size: "standard",                        // "hero" | "wide" | "standard" — layout size on the homepage
+  //   image: "/portfolio/your-project-slug/cover.jpg", // optional — omit to keep placeholder art
+  //   gallery: ["/portfolio/your-project-slug/detail.jpg"], // optional, up to 2 photos
+  // },
 ];

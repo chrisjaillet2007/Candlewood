@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Candlewood Interiors
 
-## Getting Started
+The marketing site for Candlewood Interiors, a boutique interior design
+studio serving Eastern Massachusetts. Built with Next.js (App Router),
+TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+**Updating content — portfolio projects, services, journal posts, photos —
+lives in [`CONTENT.md`](./CONTENT.md).** That's the file to hand to whoever
+maintains the site day-to-day; nothing there requires touching layout code.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — the site reloads
+automatically as you edit.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Before publishing changes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # production build; also catches typos in the data files
+npm run lint
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/            Routes (App Router) — one folder per page
+  components/     UI building blocks, grouped by area (home, layout, media, ui, work, contact)
+  data/           Editable content — see CONTENT.md
+  lib/            Small shared utilities
+public/
+  brand/          The official Candlewood logo marks
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Every photograph-shaped slot on the site (portfolio covers, journal covers,
+founder portraits) renders through `EditorialImage`
+(`src/components/media/EditorialImage.tsx`). With no real photo supplied it
+falls back to a generative placeholder plate — a bespoke line drawing in the
+brand palette, not a stock photo — so the site never ships broken images or
+generic grey boxes while real photography is still being gathered. See
+`CONTENT.md` for how to add a real photo to any of those slots.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploying
 
-## Deploy on Vercel
+This is a standard Next.js app and deploys cleanly to
+[Vercel](https://vercel.com/new) (from the team that builds Next.js) or any
+Node hosting that supports Next.js. For Vercel: push this repository, import
+it at vercel.com/new, and it builds and deploys with no extra configuration.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Once a real domain is live, update `siteUrl` in `src/app/layout.tsx` — it
+feeds the site's SEO metadata and sitemap.

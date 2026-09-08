@@ -5,6 +5,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import Line from "@/components/ui/Line";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FinalCta from "@/components/home/FinalCta";
+import { TEAM_PHOTOS, ABOUT_HERO_PHOTO } from "@/data/team";
 
 export const metadata: Metadata = {
   title: "About",
@@ -23,6 +24,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-[1400px] px-6 pb-24 sm:px-10">
         <FadeIn>
           <EditorialImage
+            src={ABOUT_HERO_PHOTO}
             alt="Annmarie and Lauren in a bright, sunlit interior"
             mood="interior"
             tone="cream"
@@ -72,6 +74,7 @@ export default function AboutPage() {
         <div className="grid gap-x-10 gap-y-16 sm:grid-cols-2">
           <FadeIn>
             <EditorialImage
+              src={TEAM_PHOTOS.annmarie}
               alt="Portrait of Annmarie Jaillet"
               mood="portrait"
               tone="sand"
@@ -88,6 +91,7 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <EditorialImage
+              src={TEAM_PHOTOS.lauren}
               alt="Portrait of Lauren Savarese"
               mood="portrait"
               tone="ivory"

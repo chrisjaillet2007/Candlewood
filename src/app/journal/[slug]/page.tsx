@@ -41,6 +41,7 @@ export default async function JournalPostPage({
 
       <FadeIn delay={0.1} className="mt-12">
         <EditorialImage
+          src={post.image}
           alt={post.title}
           mood="detail"
           tone="ivory"
