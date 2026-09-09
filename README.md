@@ -11,7 +11,21 @@ Portfolio projects specifically can be managed from a built-in `/admin`
 page on the live site — no code needed at all once it's set up; see
 [`ADMIN.md`](./ADMIN.md) for that one-time setup.
 
-## Getting started
+## Publish it (one click)
+
+This button creates a free Vercel account (if you don't have one) and deploys
+this exact code, automatically:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchrisjaillet2007%2FCandlewood%2Ftree%2Fclaude%2Fwebsite-creation-oafvp1&project-name=candlewood-interiors&repository-name=candlewood-interiors)
+
+The site itself needs no environment variables, API keys, or database — click
+the button and it deploys. The `/admin` portfolio editor is the one piece
+that needs a few extra (optional) environment variables; see `ADMIN.md`.
+
+Once it's live, add `candlewoodinteriors.com` as a custom domain from the
+Vercel project's **Settings → Domains** tab.
+
+## Getting started locally
 
 ```bash
 npm install
@@ -50,12 +64,12 @@ brand palette, not a stock photo — so the site never ships broken images or
 generic grey boxes while real photography is still being gathered. See
 `CONTENT.md` for how to add a real photo to any of those slots.
 
-## Deploying
+## Deploying manually
 
-This is a standard Next.js app and deploys cleanly to
-[Vercel](https://vercel.com/new) (from the team that builds Next.js) or any
-Node hosting that supports Next.js. For Vercel: push this repository, import
-it at vercel.com/new, and it builds and deploys with no extra configuration.
+Prefer not to use the one-click button? This is a standard Next.js app and
+deploys cleanly to [Vercel](https://vercel.com/new) or any Node hosting that
+supports Next.js. For Vercel: push this repository, import it at
+vercel.com/new, and it builds and deploys with no extra configuration.
 
 To enable the `/admin` portfolio editor, also set the environment variables
 described in `ADMIN.md` and `.env.example` — the site works fine without
