@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Work_Sans } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import SiteChrome from "@/components/layout/SiteChrome";
 import "./globals.css";
 
 const displaySerif = Fraunces({
@@ -63,9 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${displaySerif.variable} ${bodySans.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-cream text-ink font-sans antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

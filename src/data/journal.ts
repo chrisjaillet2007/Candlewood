@@ -5,6 +5,12 @@ export type JournalPost = {
   excerpt: string;
   body: string[];
   seed: string;
+  /**
+   * Path to a real cover photo, once one exists — e.g. "/journal/mudroom.jpg"
+   * for a file saved at `public/journal/mudroom.jpg`. Leave unset to keep
+   * the generative placeholder plate.
+   */
+  image?: string;
 };
 
 export const JOURNAL_POSTS: JournalPost[] = [
@@ -55,4 +61,16 @@ export const JOURNAL_POSTS: JournalPost[] = [
     ],
     seed: "journal-4",
   },
+
+  // To add a new post, copy this template into the array above:
+  //
+  // {
+  //   slug: "your-post-slug",          // used in the URL: /journal/your-post-slug
+  //   title: "Your Post Title",
+  //   category: "Design Advice",       // New England Design | Home Inspiration | Design Advice | Materials | Entertaining | Seasonal Interiors | Behind the Scenes
+  //   excerpt: "One sentence shown on the journal grid.",
+  //   body: ["First paragraph.", "Second paragraph."],
+  //   seed: "your-post-slug",          // any unique string; keeps the placeholder art stable
+  //   image: "/journal/your-post-slug.jpg", // optional — omit to keep placeholder art
+  // },
 ];

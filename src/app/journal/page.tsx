@@ -28,6 +28,7 @@ export default function JournalPage() {
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-700 ease-out group-hover:scale-[1.03]">
                     <EditorialImage
+                      src={post.image}
                       alt={post.title}
                       mood="detail"
                       tone="cream"

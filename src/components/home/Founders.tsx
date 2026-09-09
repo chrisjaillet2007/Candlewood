@@ -3,6 +3,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Line from "@/components/ui/Line";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
+import { TEAM_PHOTOS } from "@/data/team";
 
 export default function Founders() {
   return (
@@ -17,6 +18,7 @@ export default function Founders() {
       <div className="grid gap-x-10 gap-y-16 sm:grid-cols-2">
         <FadeIn>
           <EditorialImage
+            src={TEAM_PHOTOS.annmarie}
             alt="Portrait of Annmarie Jaillet, co-founder of Candlewood Interiors"
             mood="portrait"
             tone="sand"
@@ -35,6 +37,7 @@ export default function Founders() {
 
         <FadeIn delay={0.12}>
           <EditorialImage
+            src={TEAM_PHOTOS.lauren}
             alt="Portrait of Lauren Savarese, co-founder of Candlewood Interiors"
             mood="portrait"
             tone="ivory"

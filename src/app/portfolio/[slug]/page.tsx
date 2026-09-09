@@ -59,6 +59,7 @@ export default async function ProjectPage({
 
       <div className="mx-auto max-w-[1400px] px-6 py-16 sm:px-10 sm:py-24">
         <EditorialImage
+          src={project.image}
           alt={project.description}
           mood={project.mood}
           tone="cream"
@@ -70,6 +71,7 @@ export default async function ProjectPage({
 
         <div className="mt-8 grid gap-8 sm:grid-cols-2">
           <EditorialImage
+            src={project.gallery?.[0]}
             alt={`${project.description} — detail`}
             mood="detail"
             tone="sand"
@@ -77,6 +79,7 @@ export default async function ProjectPage({
             aspect="aspect-[4/5]"
           />
           <EditorialImage
+            src={project.gallery?.[1]}
             alt={`${project.description} — secondary view`}
             mood={project.mood === "exterior" ? "interior" : "exterior"}
             tone="ivory"
